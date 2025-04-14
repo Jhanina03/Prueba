@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda de Cédula</title>
+</head>
+<body>
+
+  <h2>Búsqueda de Persona por Cédula</h2>
+
+  <input type="text" id="cedulaInput" placeholder="Ingresa la cédula">
+  <button onclick="buscarCedula()">Buscar</button>
+
+  <table border="1" id="resultadoTabla" style="margin-top: 10px; display: none;">
+    <thead>
+      <tr>
+        <th>Cédula</th>
+        <th>Nombre</th>
+
+        <th>Apellido</th>
+        <th>Dirección</th>
+        <th>Telefono</th>
+      </tr>
+    </thead>
+    <tbody id="tablaBody"></tbody>
+  </table>
+
+  <script>
+    function buscarCedula() {
+      const cedula = document.getElementById("cedulaInput").value;
+
+      if (!cedula) {
+        alert("Por favor, ingresa una cédula");
+        return;
+      }
+
+      fetch(`../Controllers/apiRest.php?cedula=${cedula}`) // Ajusta esta URL según tu estructura
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("No se encontró la cédula");
+          }
+          return response.json();
+        })
+        .then(data => {
+          mostrarDatos(data);
+        })
+        .catch(error => {
+          alert(error.message);
+          document.getElementById("resultadoTabla").style.display = "none";
+        });
+    }
+
+    function mostrarDatos(persona) {
+      const tbody = document.getElementById("tablaBody");
+      tbody.innerHTML = `
+        <tr>
+          <td>${persona[0].cedula}</td>
+          <td>${persona[0].nombre}</td>
+          <td>${persona[0].apellido}</td>
+          <td>${persona[0].direccion}</td>
+                    <td>${persona[0].telefono}</td>
+        </tr>
+      `;
+      document.getElementById("resultadoTabla").style.display = "table";
+    }
+  </script>
+
+</body>
+</html>
