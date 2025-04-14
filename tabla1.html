@@ -12,12 +12,11 @@
   <input type="text" id="cedulaInput" placeholder="Ingresa la cédula">
   <button onclick="buscarCedula()">Buscar</button>
 
-  <table border="1" id="resultadoTabla" style="margin-top: 10px; display: none;">
+  <table border="1" id="resultadoTabla" style="margin-top: 10px">
     <thead>
       <tr>
         <th>Cédula</th>
         <th>Nombre</th>
-
         <th>Apellido</th>
         <th>Dirección</th>
         <th>Telefono</th>
@@ -36,19 +35,19 @@
       }
 
       fetch(`../Controllers/apiRest.php?cedula=${cedula}`) // Ajusta esta URL según tu estructura
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("No se encontró la cédula");
-          }
-          return response.json();
-        })
+        .then(response => response.json())
+        //   if (response.ok) {
+        //     throw new Error("No se encontró la cédula");
+        //   }
+        //   return response.json();
+        // })
         .then(data => {
           mostrarDatos(data);
         })
-        .catch(error => {
-          alert(error.message);
-          document.getElementById("resultadoTabla").style.display = "none";
-        });
+        // .catch(error => {
+        //   alert(error.message);
+        //   document.getElementById("resultadoTabla").style.display = "none";
+        // });
     }
 
     function mostrarDatos(persona) {
@@ -62,7 +61,7 @@
                     <td>${persona[0].telefono}</td>
         </tr>
       `;
-      document.getElementById("resultadoTabla").style.display = "table";
+    //   document.getElementById("resultadoTabla").style.display = "table";
     }
   </script>
 
