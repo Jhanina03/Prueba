@@ -1,0 +1,68 @@
+<html>
+  <head> </head>
+  <body>
+    <script>
+      // Lo importante de XMLHttpRequest tiene estados
+      var http = new XMLHttpRequest();
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          // Parsear el JSON recibido
+          var peliculas = JSON.parse(http.responseText);
+
+          //Listar title, year y duration
+          for (let i = 0; i < peliculas.length; i++) {
+            let pelicula = peliculas[i];
+            console.log(
+              `Title: ${pelicula.title}, Year: ${pelicula.year}, Duration: ${pelicula.duration}`
+            );
+          }
+          //Titulo de la pelicula y numero de actores
+          for (var i = 0; i < peliculas.length; i++) {
+            var movieTitle = peliculas[i].title;
+            var numberOfActors = peliculas[i].actors.length;
+            console.log(
+              "Title: " + movieTitle + ", Number of actors: " + numberOfActors
+            );
+          }
+          //Pelicula con dos palabras dadas en la sinopsis
+          let palabra1 = window.prompt("Ingrese la primera palabra: ");
+          let palabra2 = window.prompt("Ingrese la segunda palabra: ");
+
+          let peliculasFiltradas = peliculas.filter(
+            (pelicula) =>
+              pelicula.storyline
+                .toLowerCase()
+                .includes(palabra1.toLowerCase()) &&
+              pelicula.storyline.toLowerCase().includes(palabra2.toLowerCase())
+          );
+
+          peliculasFiltradas.forEach((pelicula) => {
+            console.log(pelicula.title);
+          });
+
+          //Encontrar el actor
+          var actor = window.prompt(
+            "Ingrese el nombre del actor que desea buscar: "
+          );
+          for (var i in peliculas) {
+            if (peliculas[i].actors.includes(actor)) {
+              console.log(
+                "Titulo de la pelicula:",
+                peliculas[i].originalTitle == ""
+                  ? peliculas[i].title
+                  : peliculas[i].originalTitle,
+                "\n - Año de estreno: ",
+                peliculas[i].year,
+                "\n - Genero: ",
+                peliculas[i].genres
+              );
+            }
+          }
+        }
+      };
+      http.open("GET", "movies.json", true);
+      http.send();
+    </script>
+  </body>
+</html>

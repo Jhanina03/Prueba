@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "carlos",
+    "apellido": "perez",
+    "edad": 43,
+    "educacion": [
+      {
+        "primaria": {
+          "nombre": "la salle",
+          "anio": "2006-2010"
+        },
+        "secundaria": {
+          "nombre": "pio",
+          "anio": "2010-2022"
+        },
+        "superior": {
+          "nombre": "bolivar",
+          "anio": "2022-2027"
+        }
+      }
+    ]
+  },
+  {
+    "nombre": "dayle",
+    "apellido": "garcia",
+    "edad": 43,
+    "educacion": [
+      {
+        "primaria": {
+          "nombre": "la salle",
+          "anio": "2006-2010"
+        },
+        "secundaria": {
+          "nombre": "pio",
+          "anio": "2010-2022"
+        },
+        "superior": {
+          "nombre": "bolivar",
+          "anio": "2022-2027"
+        }
+      }
+    ]
+  }
+]

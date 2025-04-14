@@ -1,0 +1,60 @@
+<html>
+  <head> </head>
+  <body>
+    <script>
+      // Lo importante de XMLHttpRequest tiene estados
+      var http = new XMLHttpRequest();
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          // Estado del servicio
+          console.log(http.status);
+          console.log(http.readyState);
+
+          // Parsear el JSON recibido
+          var objetoJS = JSON.parse(http.responseText);
+          console.log(objetoJS);
+          var objetojson = JSON.stringify(objetoJS);
+          console.log(objetojson);
+
+          // Recorrer los estudiantes y su educación
+          for (var i = 0; i < objetoJS.length; i++) {
+            var estudiante = objetoJS[i];
+            console.log(
+              "Estudiante: " + estudiante.nombre + " " + estudiante.apellido
+            );
+
+            // Acceder a la educación del estudiante
+            for (var j = 0; j < estudiante.educacion.length; j++) {
+              var educacion = estudiante.educacion[j];
+              console.log(
+                "  Primaria: " +
+                  educacion.primaria.nombre +
+                  " (" +
+                  educacion.primaria.anio +
+                  ")"
+              );
+              console.log(
+                "  Secundaria: " +
+                  educacion.secundaria.nombre +
+                  " (" +
+                  educacion.secundaria.anio +
+                  ")"
+              );
+              console.log(
+                "  Superior: " +
+                  educacion.superior.nombre +
+                  " (" +
+                  educacion.superior.anio +
+                  ")"
+              );
+            }
+          }
+        }
+      };
+
+      http.open("GET", "json.txt", true);
+      http.send();
+    </script>
+  </body>
+</html>

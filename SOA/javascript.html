@@ -1,0 +1,60 @@
+<html>
+<head></head>
+<body>
+<script>
+    var cadena="Hola Mundo";
+    console.log(typeof(cadena));
+    //stringfy.- convierte de tipo javascript a JSON
+    var Mijavascript=JSON.stringify(cadena);
+    console.log(typeof(Mijavascript));
+    
+    var entero=45;
+    console.log(entero);
+    console.log(typeof(entero));
+
+    var MijavascriptEntero=JSON.stringify(entero);
+    console.log(typeof(MijavascriptEntero));
+
+    var objetoJS=JSON.parse(MijavascriptEntero);
+    console.log(typeof(objetoJS));
+
+    var arreglo=["Lunes","Martes","Miercoles"];
+    console.log(arreglo[1]);
+    console.log(typeof(arreglo[1]));
+
+    var Mijavascript=JSON.stringify(arreglo);
+    console.log(typeof(Mijavascript));
+
+    var booleano= true;
+    console.log(booleano);
+    console.log(typeof(booleano));
+
+    var Mijavascript=JSON.stringify(booleano);
+    console.log(typeof(Mijavascript)); 
+
+
+    var arregloObjetos=[
+        {nombre:"Juan",edad:25,educacion:[{"primaria":"la salle","secundaria":"bolivar"}]},
+        {nombre:"Maria",edad:30,educacion:[{"primaria":"bolivar","secundaria":"la salle"}]},
+        {nombre:"Pedro",edad:35,educacion:[{"primaria":"pio","secundaria":"pio"}]}
+    ];
+
+    for(var i=0;i<arregloObjetos.length;i++){
+        console.log("Nombre: "+ arregloObjetos[i].nombre+" Educacion primaria:"+arregloObjetos[i].educacion[0].primaria);
+    }
+
+    
+    console.log(typeof(arregloObjetos));
+    var MijavascriptOB=JSON.stringify(arregloObjetos);
+    console.log(MijavascriptOB);
+    console.log(typeof(MijavascriptOB)); 
+
+    // PARSE() CONVIERTE A UN STRING de JSON A JAVASCRIPT
+
+    var objetoGD=JSON.parse(MijavascriptOB);
+    console.log(typeof(objetoGD));
+    console.log(objetoGD);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+  <head> </head>
+  <body>
+    <script>
+      // Lo importante de XMLHttpRequest tiene estados
+      var http = new XMLHttpRequest();
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          // Parsear el JSON recibido
+          var peliculas = JSON.parse(http.responseText);
+
+          //Encontrar el actor
+          var actor = window.prompt(
+            "Ingrese el nombre del actor que desea buscar: "
+          );
+          for (var i in peliculas) {
+            if (peliculas[i].actors.includes(actor)) {
+              console.log(
+                "Titulo de la pelicula:",
+                peliculas[i].originalTitle == ""
+                  ? peliculas[i].title
+                  : peliculas[i].originalTitle,
+                "\n - Anio de estreno: ",
+                peliculas[i].year,
+                "\n - Genero: ",
+                peliculas[i].genres
+              );
+            }
+          }
+        }
+      };
+      http.open("GET", "../movies.json", true);
+      http.send();
+    </script>
+  </body>
+</html>

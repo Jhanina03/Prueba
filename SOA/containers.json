@@ -1,0 +1,48 @@
+{
+  "contenedores": {
+    "grande": {
+      "envases_permitidos": ["grande_ancho", "grande_alto"]
+    },
+    "mediano": {
+      "envases_permitidos": ["mediano_ancho", "mediano_alto", "pequeno"]
+    },
+    "vertical": {
+      "envases_permitidos": ["grande_alto", "mediano_alto"]
+    }
+  },
+  "envases": {
+    "grande_ancho": {
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["agua", "leche", "aceite", "vinagre"]
+    },
+    "grande_alto": {
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["agua", "leche", "aceite", "vinagre"]
+    },
+    "mediano_ancho": {
+      "tipo": "alimentos",
+      "liquidos_permitidos": ["agua", "leche", "aceite", "vinagre"]
+    },
+    "mediano_alto": {
+      "tipo": "resistente a corrosivos",
+      "liquidos_permitidos": ["lejia", "amoniaco", "jabon", "aguarras", "gasolina", "alcohol"]
+    },
+    "pequeno": {
+      "tipo": "resistente a corrosivos",
+      "liquidos_permitidos": ["lejia", "amoniaco", "jabon", "aguarras", "gasolina", "alcohol"]
+    }
+  },
+  "liquidos": [
+    {"nombre": "agua", "tipo": "alimento"},
+    {"nombre": "leche", "tipo": "alimento"},
+    {"nombre": "lejia", "tipo": "corrosivo"},
+    {"nombre": "amoniaco", "tipo": "corrosivo"},
+    {"nombre": "jabon", "tipo": "corrosivo"},
+    {"nombre": "aguarras", "tipo": "corrosivo"},
+    {"nombre": "gasolina", "tipo": "corrosivo"},
+    {"nombre": "aceite", "tipo": "alimento"},
+    {"nombre": "vinagre", "tipo": "alimento"},
+    {"nombre": "alcohol", "tipo": "corrosivo"}
+  ]
+}
+

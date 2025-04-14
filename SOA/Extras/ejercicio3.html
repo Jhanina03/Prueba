@@ -1,0 +1,34 @@
+<html>
+  <head> </head>
+  <body>
+    <script>
+      // Lo importante de XMLHttpRequest tiene estados
+      var http = new XMLHttpRequest();
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          // Parsear el JSON recibido
+          var peliculas = JSON.parse(http.responseText);
+
+          //Pelicula con dos palabras dadas en la sinopsis
+          let palabra1 = window.prompt("Ingrese la primera palabra: ");
+          let palabra2 = window.prompt("Ingrese la segunda palabra: ");
+
+          let peliculasFiltradas = peliculas.filter(
+            (pelicula) =>
+              pelicula.storyline
+                .toLowerCase()
+                .includes(palabra1.toLowerCase()) &&
+              pelicula.storyline.toLowerCase().includes(palabra2.toLowerCase())
+          );
+
+          peliculasFiltradas.forEach((pelicula) => {
+            console.log(pelicula.title);
+          });
+        }
+      };
+      http.open("GET", "../movies.json", true);
+      http.send();
+    </script>
+  </body>
+</html>

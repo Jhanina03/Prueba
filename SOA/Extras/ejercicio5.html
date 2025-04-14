@@ -1,0 +1,53 @@
+<script>
+  var Http = new XMLHttpRequest();
+
+  Http.onreadystatechange = function () {
+    if (Http.readyState == 4 && Http.status == 200) {
+      console.log(Http.status); // Estado del servidor
+      console.log(Http.readyState); // Estado de la petición / archivo JSON
+
+      var peliculas = JSON.parse(Http.responseText);
+
+      const calcularMedia = (ratings) =>
+        ratings.reduce((a, b) => a + b, 0) / ratings.length;
+
+      const obtenerTopPeliculas = (inicio, fin) => {
+        return peliculas
+          .filter((movie) => {
+            const year = parseInt(movie.year, 10);
+            return year >= inicio && year <= fin;
+          })
+          .map((movie) => ({
+            title: movie.title,
+            posterurl: movie.posterurl,
+            averageRating: calcularMedia(movie.ratings),
+          }))
+          .sort((a, b) => b.averageRating - a.averageRating)
+          .slice(0, 3);
+      };
+
+      const fechaInicio = parseInt(prompt("Ingrese el anio de inicio:"), 10);
+      const fechaFin = parseInt(prompt("Ingrese el anio de fin:"), 10);
+
+      if (isNaN(fechaInicio) || isNaN(fechaFin)) {
+        alert("Por favor, ingrese años válidos.");
+      } else {
+        const topPeliculas = obtenerTopPeliculas(fechaInicio, fechaFin);
+
+        if (topPeliculas.length === 0) {
+          alert("No se encontraron películas en el rango de fechas dado.");
+        } else {
+          topPeliculas.forEach((pelicula) => {
+            console.log(
+              `Titulo: ${pelicula.title}\nPoster: ${
+                pelicula.posterurl
+              }\nMedia de puntuaciones: ${pelicula.averageRating.toFixed(2)}`
+            );
+          });
+        }
+      }
+    }
+  };
+  Http.open("GET", "../movies.json");
+  Http.send();
+</script>
